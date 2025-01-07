@@ -1,4 +1,5 @@
-version: "3"
+# lidt udsikker på om version er nødvendig
+# version: "3"
 
 networks:
   kafka-net:
