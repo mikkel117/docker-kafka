@@ -1,7 +1,5 @@
-# Base image
 FROM provectuslabs/kafka-ui:latest
 
-# Install curl
-# RUN apt-get update && apt-get install -y curl && apt-get clean && rm -rf /var/lib/apt/lists/*
+# Install curl to be able to make HTTP requests so that we can check the health of the network
 USER root
 RUN apk add --no-cache curl
