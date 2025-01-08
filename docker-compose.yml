@@ -65,3 +65,16 @@ services:
       - "8080:8080"
     networks:
       - kafka-net
+
+  # not sure if this works it satarts up that's all i know right now
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.10.1
+    container_name: elasticsearch
+    environment:
+      - discovery.type=single-node
+      - ES_JAVA_OPTS=-Xms512m -Xmx512m
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    networks:
+      - kafka-net
