@@ -8,7 +8,7 @@ services:
   zookeeper:
     image: bitnami/zookeeper:latest
     environment:
-      ALLOW_ANONYMOUS_LOGIN: "yes"
+      ALLOW_ANONYMOUS_LOGIN: yes
     ports:
       - 2181:2181
     networks:
@@ -45,7 +45,7 @@ services:
       - "8081:8081"
     environment:
       SCHEMA_REGISTRY_HOST_NAME: kafka-schema-registry
-      SCHEMA_REGISTRY_KAFKASTORE_BOOTSTRAP_SERVERS: "PLAINTEXT://kafka:9092"
+      SCHEMA_REGISTRY_KAFKASTORE_BOOTSTRAP_SERVERS: PLAINTEXT://kafka:9092
       SCHEMA_REGISTRY_LISTENERS: http://0.0.0.0:8081
     networks:
       - kafka-net
@@ -60,7 +60,7 @@ services:
     environment:
       KAFKA_CLUSTERS_0_NAME: local
       KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: kafka:9092
-      KAFKA_CLUSTERS_0_SCHEMAREGISTRY: "http://kafka-schema-registry:8081"
+      KAFKA_CLUSTERS_0_SCHEMAREGISTRY: http://kafka-schema-registry:8081
     ports:
       - "8080:8080"
     networks:
