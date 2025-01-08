@@ -15,7 +15,9 @@ services:
       - kafka-net
 
   kafka:
-    image: bitnami/kafka:latest
+    build:
+      context: .
+      dockerfile: Dockerfile.kafka
     depends_on:
       - zookeeper
     ports:
