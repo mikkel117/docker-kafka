@@ -4,6 +4,7 @@
 networks:
   kafka-net:
     driver: bridge
+
 services:
   zookeeper:
     image: bitnami/zookeeper:latest
@@ -29,6 +30,11 @@ services:
       KAFKA_CFG_AUTO_CREATE_TOPICS_ENABLE: "true"
       ALLOW_PLAINTEXT_LISTENER: "yes"
       KAFKA_LOG_RETENTION_HOURS: 168
+    healthcheck:
+      test: ["CMD", "kafka-broker-api-versions.sh", "--bootstrap-server", "localhost:9092",]
+      interval: 10s
+      timeout: 10s
+      retries: 10
     networks:
       - kafka-net
 
@@ -94,5 +100,18 @@ services:
     container_name: node-exporter
     ports:
       - "9100:9100"
+    networks:
+      - kafka-net
+
+  kafka-exporter:
+    image: danielqsj/kafka-exporter:latest
+    container_name: kafka-exporter
+    depends_on:
+      kafka:
+        condition: service_healthy
+    environment:
+      KAFKA_BROKERS: kafka:9092
+    ports:
+      - "9308:9308"
     networks:
       - kafka-net
