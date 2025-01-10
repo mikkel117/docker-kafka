@@ -1,6 +1,7 @@
 # Kafka Docker
-
-Denne Docker Compose-fil bruges til at køre Kafka, Zookeeper, Schema Registry, Kafka UI, Prometheus, Grafana, Loki og de nødvendige exporters for at få Kafka og Prometheus til at kommunikere.
+Dette repository har 2 forskellige Kafka-konfigurationer på 2 forskellige branches:
+- **`main`**: køre Kafka, Zookeeper, Schema Registry, Kafka UI
+- **`Prometheus`**: køre Kafka, Zookeeper, Schema Registry, Kafka UI, Prometheus, Grafana, Loki og de nødvendige exporters for at få Kafka og Prometheus til at kommunikere.
 
 ## Services
 
