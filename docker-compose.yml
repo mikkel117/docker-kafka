@@ -116,6 +116,9 @@ services:
     networks:
       - kafka-net
 
+
+#https://github.com/grafana/tutorial-environment
+#https://grafana.com/tutorials/grafana-fundamentals/?pg=tutorials&plcmt=results 
   grafana:
     image: grafana/grafana:11.3.0
     ports:
