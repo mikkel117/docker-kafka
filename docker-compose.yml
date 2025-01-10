@@ -1,5 +1,4 @@
-# lidt udsikker på om version er nødvendig
-# version: "3"
+version: "3"
 
 networks:
   kafka-net:
@@ -25,7 +24,7 @@ services:
       KAFKA_BROKER_ID: 1
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
       KAFKA_LISTENERS: PLAINTEXT://:9092
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://172.25.224.1:9092 # this is the ip of the host machine
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://172.25.224.1:9092 #  dette er WSL ip adressen
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT
       KAFKA_CFG_AUTO_CREATE_TOPICS_ENABLE: "true"
       ALLOW_PLAINTEXT_LISTENER: "yes"
@@ -70,7 +69,7 @@ services:
     networks:
       - kafka-net
 
-  # it looks like this is not needed for the prometheus to talk to kafka but im gonna keep it here
+  # det ser ud til at elastic search ikke er nødvendig men gemmer det lige i tilfælde af at det bliver nødvendigt
   # elasticsearch:
   #   image: docker.elastic.co/elasticsearch/elasticsearch:7.10.1
   #   container_name: elasticsearch
@@ -84,7 +83,7 @@ services:
   #     - kafka-net
 
   # https://mxulises.medium.com/simple-prometheus-setup-on-docker-compose-f702d5f98579
-  # this is a arctical on how to setup prometheus with a node exporter
+  # dette er en guide til hvordan man sætter prometheus op med en node exporter og nogle alarts
   prometheus:
     image: prom/prometheus
     container_name: prometheus
@@ -117,8 +116,6 @@ services:
       - kafka-net
 
 
-#https://github.com/grafana/tutorial-environment
-#https://grafana.com/tutorials/grafana-fundamentals/?pg=tutorials&plcmt=results 
   grafana:
     image: grafana/grafana:11.3.0
     ports:
@@ -128,9 +125,9 @@ services:
     environment:
       - "GF_DEFAULT_APP_MODE=development"
       - "GF_LOG_LEVEL=debug"
-      - GF_AUTH_ANONYMOUS_ORG_ROLE=Admin # grants admin role to anonymous access
-      - GF_AUTH_ANONYMOUS_ENABLED=true # removes login 1/2
-      - GF_AUTH_BASIC_ENABLED=false # removes login 2/2
+      - GF_AUTH_ANONYMOUS_ORG_ROLE=Admin
+      - GF_AUTH_ANONYMOUS_ENABLED=true
+      - GF_AUTH_BASIC_ENABLED=false
       - GF_FEATURE_TOGGLES_ENABLE=alertingSimplifiedRouting,alertingQueryAndExpressionsStepMode
     volumes:
       - ./grafana/provisioning/datasources:/etc/grafana/provisioning/datasources
