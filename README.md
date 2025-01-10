@@ -42,7 +42,7 @@ Denne Docker Compose-fil bruges til at køre Kafka, Zookeeper, Schema Registry, 
 
 ## Setup
 
-Når du har hentet dette repository, skal du redigere `docker-compose.yml` og ændre `KAFKA_ADVERTISED_LISTENERS` til at bruge din WSL IP-adresse, fx. 'PLAINTEXT://172.25.224.0:9092'.
+Når du har hentet dette repository, skal du redigere `docker-compose.yml` og ændre `KAFKA_ADVERTISED_LISTENERS` til at bruge din WSL IP-adresse. Når du ændrer IP'en, skal den se sådan her ud, bare med din egen IP: `PLAINTEXT://172.25.224.0:9092`.
 
 For at finde din WSL IP-adresse:
 1. Åbn kommandoprompt (cmd) på din Windows-maskine.
